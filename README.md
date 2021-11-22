@@ -5,6 +5,6 @@ Just some code for a senior year (undergrad) research project. It is built to te
 # Organization
 Branch Tree:
   - main
-    - sigmoid_func: Most of the code documentation is here. This is also the code for the sigmoid logistic function.
-    - hyperbolic_func: This is the code for the hyperbolic tangent function.
-    - ReLU_func: This is the code for the rectified linear unit function.
+    - sigmoid_func: Most of the code documentation is here. This is also the code for the sigmoid logistic function version of the perceptron.
+    - hyperbolic_func: This is the code for the hyperbolic tangent function version of the perceptron.
+    - ReLU_func: This is the code for the rectified linear unit function version of the perceptron.
