@@ -5,18 +5,23 @@
 # in a variety of scenarios.
 # 
 # By: Vincent Baumgarten
-# Date of Completion: 
+# Date of Completion: 11-22-21
 # 
 
+#external library imports
 import numpy as np
 import sys, os, random
 from math import *
 
+#bias initialized as random value between 0 and 1
 bias = random.random()
 
-weights = open("weight.txt", "w+") #opening the weights file for writing purposes
-ifile = open("input.txt", "r") #opening the input file for reading purposes
+#opening the weights file for writing purposes
+weights = open("weight.txt", "w+")
+#opening the input file for reading purposes
+ifile = open("input.txt", "r")
 
+#randomizing weight values based on number of inputs
 input_data = ifile.readlines()
 for line in input_data:
     for i in line.split():
@@ -26,15 +31,19 @@ for line in input_data:
         
 weights.close()
 
-x = np.array([]) #establishment of the input array
-w = np.array([]) #establishment of the weight array
+#establishment of the input array
+x = np.array([])
+#establishment of the weight array
+w = np.array([])
 
+#porting input data from text file to numpy array
 for line in input_data:
     train_input = line.split()
     x = np.append(x, train_input)
 
 weights = open("weight.txt", "r")
 
+#porting weight data from text file to numpy array
 weight_data = weights.readlines()
 for new_line in weight_data:
     train_weight = new_line.split()
@@ -42,8 +51,10 @@ for new_line in weight_data:
 
 weights.close()              
 
-training_flag = 1 #training mode initialized
+#training mode initialized
+training_flag = 1 
 
+#introductory user interface
 print("Welcome to the Perceptron CLI! Please enter the number of the mode you wish to use.")
 print()
 print("(1) Training Mode: Trains the perceptron using pre-programmed activation function and weight and bias change formulas.")
@@ -51,15 +62,14 @@ print("(2) Testing Mode: Runs a forward propogation of the system to provide a p
 print("(999) Exit: Exits the program.")
 print()
 
-while True: #used to control continuous training and testing
+#loop used to control continuous training and testing
+while True:
     user_input = input(">>> ")
-
-    
-    if user_input == '1':
+    if user_input == '1': #training mode
         count = 0
         tol = float(input("Input your tolerance (in decimal form; e.g. 0.01): "))
         actual_val = int(input("Please input the value of the actual answer: "))
-        while training_flag == 1: #while in training mode
+        while training_flag == 1: #training loop, managed by training_flag
 
             count += 1
             
@@ -97,22 +107,22 @@ while True: #used to control continuous training and testing
 
             print("Round " + str(count) + " has been completed.")
             
-    elif user_input == '2':
+    elif user_input == '2': #testing mode
         inner_product = 0
         for i in range(len(x)):
             inner_product += int(x[i])*float(w[i])
-        z = inner_product + bias #value used in calculating the predicted value
+        z = inner_product + bias
         predicted_val = 1/(1+exp(z*-1))
         
         print("Predicted value: " + str(round(predicted_val)))
         print()
 
-    elif user_input == "999":
+    elif user_input == "999": #exit function
         weights.close()
         ifile.close()
         sys.exit()
 
-    else:
+    else: #just in case of typo or other error
         print("Your input was not recognized. Try again.")
         print()
 
